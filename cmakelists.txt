@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 3.0 REQUIRED COMPONENTS Graphics Window System)
 
-add_executable(arkanoid main.cpp)
+add_executable(test test.cpp)
+target_link_libraries(test PRIVATE SFML::Graphics SFML::Window SFML::System)
 
-target_link_libraries(arkanoid PRIVATE SFML::Graphics SFML::Window SFML::System)
+
+add_library(GameCore src/core/core.cpp)
+target_include_directories(GameCore PUBLIC src/core)
