@@ -4,15 +4,33 @@ project(Arkanoid LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#todo transision to FetchContent style for sfml (and later catch2) importing 
-find_package(SFML 3.0 REQUIRED COMPONENTS Graphics Window System)
+include(FetchContent)
+set(FETCHCONTENT_QUIET OFF)
 
+# Fetch SFML 3.0.0
+FetchContent_Declare(
+    SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG        3.0.0
+)
+FetchContent_MakeAvailable(SFML)
+
+# Fetch Catch2
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG        v3.16.1
+)
+FetchContent_MakeAvailable(Catch2)
+
+# Executable 1: SFML test
 add_executable(test_sfml testing/test_sfml.cpp)
-target_link_libraries(test PRIVATE SFML::Graphics SFML::Window SFML::System)
+target_link_libraries(test_sfml PRIVATE SFML::Graphics SFML::Window SFML::System)
 
-find_package(Catch2 3 REQUIRED)
-add_executable(tests /testing/main_test.cpp)
-target_link_libraries(testing PRIVATE Catch2::Catch2WithMain)
+# Executable 2: Unit tests
+add_executable(tests testing/main_test.cpp)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
+# Library: Game Core
 add_library(GameCore src/core/core.cpp)
 target_include_directories(GameCore PUBLIC src/core)
