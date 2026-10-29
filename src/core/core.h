@@ -7,10 +7,9 @@ struct vector2d
 
 class Ball {
     private:
-        //should use var_ for class variables?
-        vector2d coordinates;
-        vector2d velocity;
-        float radius;
+        vector2d coordinates_;
+        vector2d velocity_;
+        float radius_;
     public:
         Ball(vector2d startPos, vector2d startVel, float ballRadius);
 
@@ -24,10 +23,20 @@ class Ball {
 
 class Wall {
     private:
-        vector2d size;
+        vector2d size_;
     public:
         Wall(vector2d bottomRight);
         
         vector2d getSize() const;
 };
 
+class Brick {
+    private:
+        vector2d coordinates_;
+        int hp_;
+    public:
+        Brick(vector2d coordinates, int hp);
+
+        vector2d getPos() const;
+        int getHp() const;
+};
