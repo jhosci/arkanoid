@@ -2,17 +2,11 @@
 
 //Also shouldn't be commenting in this file, in .h instead
 
-//METODY BAALA
-Ball::Ball(vector2d startPos, vector2d startVel, float ballRadius) {
-    //to read: initializer list?
-    coordinates_ = startPos;
-    velocity_ = startVel;
-    radius_ = ballRadius;
-}
+Ball::Ball(vector2d position, vector2d velocity, float radius): position_(position), velocity_(velocity), radius_(radius) {}
 
-void Ball::update_pos() {
-    coordinates_.x += velocity_.x;
-    coordinates_.y += velocity_.y; 
+void Ball::updatePosition(float dt) {
+    position_.x += velocity_.x * dt;
+    position_.y += velocity_.y * dt; 
 }
 
 void Ball::bounceX() {
@@ -23,20 +17,66 @@ void Ball::bounceY() {
     velocity_.y *= -1;
 }
 
-vector2d Ball::getPos() const {return coordinates_;}
+vector2d Ball::getPosition() const {return position_;}
 
-vector2d Ball::getVel() const {return velocity_;}
+vector2d Ball::getVelocity() const {return velocity_;}
 
-//METODY ŚCIAN
-Wall::Wall(vector2d bottomRight) {size_ = bottomRight;}
+float Ball::getRadius() const {return radius_;}
 
-vector2d Wall::getSize() const {return size_;}
 
-// METODY CEGIEL
-Brick::Brick(vector2d coordinates, int hp) {
-    coordinates_ = coordinates;
-    hp_ = hp;
-};
 
-vector2d Brick::getPos() const {return coordinates_;}
+Arena::Arena(vector2d size): size_(size) {}
+
+bool Arena::ballHitWallX(Ball ball) const {
+    vector2d ball_position = ball.getPosition();
+    float ball_radius = ball.getRadius();
+
+    // Left arena boundary is assumed 0; raising towards right
+    if (ball_position.x - ball_radius <= 0 || ball_position.x + ball_radius >= size_.x) return true;
+    return false;
+}
+
+bool Arena::ballHitWallY(Ball ball) const {
+    vector2d ball_position = ball.getPosition();
+    float ball_radius = ball.getRadius();
+
+    // Upper arena boundary is assumed 0; raising towards bottom
+    if (ball_position.y - ball_radius <= 0 || ball_position.y + ball_radius >= size_.y) return true;
+    return false;
+}
+
+vector2d Arena::getSize() const {return size_;}
+
+
+
+Brick::Brick(vector2d position, vector2d size, int hp): position_(position), size_(size), hp_(hp) {}
+
+void Brick::onHit() {hp_ -= 1;}
+
+vector2d Brick::getPosition() const {return position_;}
+
+vector2d Brick::getSize() const {return size_;}
+
 int Brick::getHp() const {return hp_;}
+
+// METODY PALETKI
+Paddle::Paddle(vector2d position, vector2d size, float velocity): position_(position), size_(size), velocity_(velocity) {}
+
+void Paddle::moveLeft(float dt) {position_.x -= velocity_ * dt;}
+
+void Paddle::moveRight(float dt) {position_.x += velocity_ * dt;}
+
+// void Paddle::moveRight(float dt, float boundary) {
+//     if ((position_.x + width_) >= boundary) {
+//         position_.x = boundary - width_;
+//     }
+//     else {
+//         position_.x += velocity_ * dt;
+//     } 
+// }
+
+vector2d Paddle::getPosition() const {return position_;}
+
+vector2d Paddle::getSize() const {return size_;}
+
+float Paddle::getVelocity() const {return velocity_;}
