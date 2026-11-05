@@ -18,6 +18,8 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG        3.1.0
 )
+set(SFML_BUILD_AUDIO OFF)
+set(SFML_BUILD_NETWORK OFF)
 
 FetchContent_MakeAvailable(SFML)
 
@@ -34,27 +36,30 @@ FetchContent_MakeAvailable(Catch2)
 
 
 # ACTUAL THINGS TO COMPILE
-set(GAME_CORE_INCLUDE 
+set(GAME_CORE_SOURCES 
     src/core/Ball.cpp
     src/core/Paddle.cpp
     src/core/Brick.cpp
     src/core/Arena.cpp 
 )
 
-add_library(GameCore ${GAME_CORE_INCLUDE})
+add_library(GameCore ${GAME_CORE_SOURCES})
 target_include_directories(GameCore PUBLIC src/include)
 
 add_executable(test_sfml testing/test_sfml.cpp)
 target_link_libraries(test_sfml PUBLIC 
     SFML::Graphics 
     SFML::Window 
-    SFML::Audio
     SFML::System 
 )
 
-add_executable(tests testing/test_main.cpp)
-target_link_libraries(tests PUBLIC 
-    Catch2::Catch2WithMain 
-    GameCore 
-)
 
+# UNIT TESTS
+enable_testing()
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
+include(Catch)
+
+add_executable(tests testing/test_brick.cpp)
+target_link_libraries(tests PUBLIC Catch2::Catch2WithMain GameCore)
+
+catch_discover_tests(tests)

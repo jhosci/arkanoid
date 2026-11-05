@@ -1,0 +1,3 @@
+ - Make arena to be querying / answering only, no bouncing or other
+ - World class with main loop, asking arena if there's hit or smth, then killing bricks bouncing balls and so on
+ - tests, tests, tests

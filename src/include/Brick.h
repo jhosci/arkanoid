@@ -11,7 +11,7 @@ class Brick {
         Brick(vector2d position, vector2d size, int hp);
 
         void onHit();
-        // bool death(); //not yet sure if it's to be done like that
+        bool isDestroyed();
 
         vector2d getPosition() const;
         vector2d getSize() const;
