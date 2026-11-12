@@ -34,21 +34,22 @@ FetchContent_MakeAvailable(Catch2)
 
 
 # ACTUAL THINGS TO COMPILE
-set(GAME_CORE_INCLUDE 
+set(GAME_CORE_SOURCES 
     src/core/Ball.cpp
     src/core/Paddle.cpp
     src/core/Brick.cpp
     src/core/Arena.cpp 
+    src/core/Player.cpp
+    src/core/PhysicsEngine.cpp
 )
 
-add_library(GameCore ${GAME_CORE_INCLUDE})
+add_library(GameCore ${GAME_CORE_SOURCES})
 target_include_directories(GameCore PUBLIC src/include)
 
 add_executable(test_sfml testing/test_sfml.cpp)
 target_link_libraries(test_sfml PUBLIC 
     SFML::Graphics 
     SFML::Window 
-    SFML::Audio
     SFML::System 
 )
 
@@ -57,4 +58,5 @@ target_link_libraries(tests PUBLIC
     Catch2::Catch2WithMain 
     GameCore 
 )
+
 

@@ -15,6 +15,11 @@ void Ball::bounceY() {
     velocity_.y *= -1;
 }
 
+void Ball::setVelocity(vector2d newVelocity) {
+    velocity_ = newVelocity;
+}
+
+
 vector2d Ball::getPosition() const {return position_;}
 
 vector2d Ball::getVelocity() const {return velocity_;}

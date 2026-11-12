@@ -12,6 +12,7 @@ class Ball {
         void updatePosition(float dt);
         void bounceX();
         void bounceY();
+        void setVelocity(vector2d newVelocity);
 
         vector2d getPosition() const;
         vector2d getVelocity() const;

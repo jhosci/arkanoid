@@ -7,9 +7,11 @@ class Paddle {
         vector2d position_;
         vector2d size_;
         float velocity_;
+        float minimumX_;
+        float maximumX_;
 
     public:
-        Paddle(vector2d position, vector2d size, float velocity);
+        Paddle(vector2d position, vector2d size, float velocity, float minimumX, float maximumX);
 
         void moveRight(float dt);
         void moveLeft(float dt);

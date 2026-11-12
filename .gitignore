@@ -4,3 +4,4 @@ resources/
 build/
 CMakePresets.json
 notes
+.continue/
