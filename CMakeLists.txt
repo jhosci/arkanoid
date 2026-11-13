@@ -40,7 +40,8 @@ set(GAME_CORE_SOURCES
     src/core/Brick.cpp
     src/core/Arena.cpp 
     src/core/Player.cpp
-    src/core/PhysicsEngine.cpp
+    src/core/World.cpp
+    src/core/Geometry.cpp
 )
 
 add_library(GameCore ${GAME_CORE_SOURCES})

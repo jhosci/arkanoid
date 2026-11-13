@@ -19,6 +19,10 @@ void Ball::setVelocity(vector2d newVelocity) {
     velocity_ = newVelocity;
 }
 
+void Ball::setPosition(vector2d newPosition) {
+    position_ = newPosition;
+}
+
 
 vector2d Ball::getPosition() const {return position_;}
 

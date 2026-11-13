@@ -1,5 +1,5 @@
 #pragma once
-#include "vector2d.h"
+#include "Geometry.h"
 
 class Paddle {
     //position is it's topleft corner, bottomright is in (position+size) 
