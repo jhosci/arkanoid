@@ -41,6 +41,10 @@ set(GAME_CORE_SOURCES
     src/core/Paddle.cpp
     src/core/Brick.cpp
     src/core/Arena.cpp 
+    src/core/Player.cpp
+    src/core/World.cpp
+    src/core/Geometry.cpp
+    src/core/LevelBuilder.cpp
 )
 
 add_library(GameCore ${GAME_CORE_SOURCES})
@@ -61,5 +65,6 @@ include(Catch)
 
 add_executable(tests testing/test_brick.cpp)
 target_link_libraries(tests PUBLIC Catch2::Catch2WithMain GameCore)
+
 
 catch_discover_tests(tests)

@@ -1,15 +1,18 @@
 #pragma once
-#include "vector2d.h"
+#include "Geometry.h"
 
+// minimumX, maximumX are the limits of the arena, Paddle takes it's width into account on it's own
 class Paddle {
     //position is it's topleft corner, bottomright is in (position+size) 
     private:
         vector2d position_;
         vector2d size_;
         float velocity_;
+        float minimumX_;
+        float maximumX_;
 
     public:
-        Paddle(vector2d position, vector2d size, float velocity);
+        Paddle(vector2d position, vector2d size, float velocity, float minimumX, float maximumX);
 
         void moveRight(float dt);
         void moveLeft(float dt);
