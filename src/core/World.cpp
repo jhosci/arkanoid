@@ -14,7 +14,7 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
     
     // can't believe there is no built-in function for this, 75deg is max angle of bounce
     // bonus: constexpr behaves a bit like DEFINE (compiles the value), while const just calculates it during runtime
-    float maxAngleRad = radians(30.0f);
+    float maxAngleRad = radians(75.0f);
     float angle = offset * maxAngleRad;
 
     // no way, there is no function for changing to radians, but hypotenuse()? No problem!
@@ -31,7 +31,7 @@ World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<s
     arena_(arena),
     player_(player),
     paddle_(paddle),
-    bricks_(bricks)
+    bricks_(std::move(bricks))
     {if (state_ == GameState::Serving) {createBallOnPaddle();}}
 
 

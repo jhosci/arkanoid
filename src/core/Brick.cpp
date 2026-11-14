@@ -6,8 +6,6 @@ void Brick::onHit() {if(hp_ > 0) hp_ -= 1;}
 
 bool Brick::isDestroyed() const {return hp_ <= 0;}
 
-bool Brick::isDestroyed() {return hp_ == 0;}
-
 vector2d Brick::getPosition() const {return position_;}
 
 vector2d Brick::getSize() const {return size_;}
