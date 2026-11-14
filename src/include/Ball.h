@@ -13,7 +13,7 @@ class Ball {
         void bounceX();
         void bounceY();
         void setVelocity(vector2d newVelocity);
-        void setPosition(vector2d newPosition);
+        // void setPosition(vector2d newPosition);
 
         vector2d getPosition() const;
         vector2d getVelocity() const;

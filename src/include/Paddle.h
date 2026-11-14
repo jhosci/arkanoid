@@ -1,6 +1,7 @@
 #pragma once
 #include "Geometry.h"
 
+// minimumX, maximumX are the limits of the arena, Paddle takes it's width into account on it's own
 class Paddle {
     //position is it's topleft corner, bottomright is in (position+size) 
     private:

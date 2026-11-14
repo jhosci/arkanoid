@@ -3,7 +3,7 @@
 
 Arena::Arena(vector2d size): size_(size) {}
 
-WallContact Arena::checkWallHit(Ball &ball) const {
+WallContact Arena::checkWallHit(const Ball &ball) const {
     vector2d position = ball.getPosition();
     vector2d velocity = ball.getVelocity();
     float radius = ball.getRadius();

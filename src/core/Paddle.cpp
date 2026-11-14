@@ -5,12 +5,12 @@ Paddle::Paddle(vector2d position, vector2d size, float velocity, float minimumX,
 
 
 void Paddle::moveLeft(float dt) {
-    position_.x = std::clamp(position_.x -= velocity_ * dt, minimumX_, maximumX_);
+    position_.x = std::clamp(position_.x -= velocity_ * dt, minimumX_, maximumX_-size_.x);
 
 }
 
 void Paddle::moveRight(float dt) {
-    position_.x = std::clamp(position_.x += velocity_ * dt, minimumX_, maximumX_);
+    position_.x = std::clamp(position_.x += velocity_ * dt, minimumX_, maximumX_-size_.x);
 }
 
 vector2d Paddle::getPosition() const {return position_;}

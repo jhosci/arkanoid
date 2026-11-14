@@ -16,8 +16,6 @@ class World {
         Arena arena_;
         Player player_;
         Paddle paddle_;
-
-        // this is terrible
         std::vector<std::unique_ptr<Brick>> bricks_;
         GameState state_ = GameState::Serving; 
 
@@ -41,6 +39,11 @@ class World {
         void movePaddleRight(float dt);
         void launchBall();
 
-        
+        // should't define whole methods here, fix later
+        const Ball& ball() const { return ball_; }
+        const Paddle& paddle() const { return paddle_; }
+        const Player& player() const { return player_; }
+        const std::vector<std::unique_ptr<Brick>>& bricks() const { return bricks_; }
+        GameState state() const { return state_; }
 
     };

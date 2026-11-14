@@ -42,6 +42,7 @@ set(GAME_CORE_SOURCES
     src/core/Player.cpp
     src/core/World.cpp
     src/core/Geometry.cpp
+    src/core/LevelBuilder.cpp
 )
 
 add_library(GameCore ${GAME_CORE_SOURCES})

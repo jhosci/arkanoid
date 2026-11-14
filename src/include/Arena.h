@@ -13,7 +13,7 @@ class Arena {
     public:
         Arena(vector2d size);
 
-        WallContact checkWallHit(Ball &ball) const;
+        WallContact checkWallHit(const Ball &ball) const;
 
         vector2d getSize() const;
 };
