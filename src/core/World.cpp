@@ -19,7 +19,7 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
 
     // no way, there is no function for changing to radians, but hypotenuse()? No problem!
     float speed = std::hypot(ball.getVelocity().x, ball.getVelocity().y);
-    vector2d newVelocity = {speed * std::cos(angle), speed * std::sin(angle) * -1};
+    vector2d newVelocity = {speed * std::sin(angle), speed * std::cos(angle) * -1};
 
     return newVelocity;
 }
