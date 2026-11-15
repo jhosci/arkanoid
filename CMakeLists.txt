@@ -74,7 +74,7 @@ add_executable(tests
     testing/test_brick.cpp
     testing/test_arena.cpp
     testing/test_ball.cpp
-    testing/test_bob_the_builder.cpp
+    testing/test_levelbuilder.cpp
     testing/test_geometry.cpp
     testing/test_paddle.cpp
     testing/test_player.cpp
