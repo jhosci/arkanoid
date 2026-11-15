@@ -26,12 +26,13 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
 
 
 
-World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks): 
+World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks, GameState state): 
     ball_(ball),
     arena_(arena),
     player_(player),
     paddle_(paddle),
-    bricks_(std::move(bricks))
+    bricks_(std::move(bricks)),
+    state_(state)
     {if (state_ == GameState::Serving) {createBallOnPaddle();}}
 
 

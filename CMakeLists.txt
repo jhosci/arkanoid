@@ -63,7 +63,18 @@ enable_testing()
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 include(Catch)
 
-add_executable(tests testing/test_brick.cpp)
+add_executable(tests 
+    testing/test_brick.cpp
+    testing/test_arena.cpp
+    testing/test_ball.cpp
+    testing/test_bob_the_builder.cpp
+    testing/test_geometry.cpp
+    testing/test_main.cpp
+    testing/test_paddle.cpp
+    testing/test_player.cpp
+    testing/test_world.cpp
+    )
+    
 target_link_libraries(tests PUBLIC Catch2::Catch2WithMain GameCore)
 
 

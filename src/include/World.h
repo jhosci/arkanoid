@@ -17,7 +17,7 @@ class World {
         Player player_;
         Paddle paddle_;
         std::vector<std::unique_ptr<Brick>> bricks_;
-        GameState state_ = GameState::Serving; 
+        GameState state_; 
 
         // need std::vector<std::unique_ptr<OBJ>> for bricks (for later brick types); normal vetor can store only 1 datatype (and strips children classes from any added data)
         // it looks like I can't really avoid these damn pointers
@@ -30,7 +30,7 @@ class World {
         void removeDestroyedBricks();
 
     public:
-        World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks);
+        World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks, GameState state = GameState::Serving);
 
         void tick(float dt);
 

@@ -1,35 +1,34 @@
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/catch_approx.hpp>
 #include "Brick.h"
 
 /*
 Module approx is because:
 > 0.1 + 0.2
 > 0.30000000000000004
+
+(I love mathematics)
 */
 
 //To just see the syntax of catch2
-TEST_CASE("Brick health behavior") {
-    SECTION("Brick is destroyed after exactly hp hits") {
+TEST_CASE("Brick tracks hit points and marks itself destroyed only when HP reaches zero") {
+    SECTION("Brick with 3 HP survives two hits and is destroyed on the third") {
+        Brick brick({100.f, 100.f}, {50.f, 20.f}, 3);
 
-    
-        Brick brick({0.f, 0.f}, {60.f, 20.f}, 3);
+        brick.onHit();
+        brick.onHit();
+        REQUIRE_FALSE(brick.isDestroyed());
 
-        CHECK_FALSE(brick.isDestroyed());
         brick.onHit();
-        brick.onHit();
-        CHECK_FALSE(brick.isDestroyed());   
-        brick.onHit();
-        CHECK(brick.isDestroyed());         
+        CHECK(brick.isDestroyed());
     }
 
-    SECTION("Brick's hp does not go negative values") { // of course it will, I haven't written it yet
-        Brick brick({0.f, 0.f}, {60.f, 20.f}, 1);
+    SECTION("Brick with 1 HP clamps HP at zero instead of going negative on extra hits") {
+        Brick brick({100.f, 100.f}, {50.f, 20.f}, 1);
 
         brick.onHit();
         brick.onHit();
 
-        CHECK(brick.isDestroyed());
         CHECK(brick.getHp() == 0);
+        CHECK(brick.isDestroyed());
     }
 }
