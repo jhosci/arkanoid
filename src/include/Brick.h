@@ -12,11 +12,7 @@ class Brick {
         Brick(vector2d position, vector2d size, int hp, int score=10);
 
         virtual ~Brick() = default;
-
-        // to read: virtual functions to delete children classes w/o memory leaks URGENT
         
-        // virtual methods are *magic* and can be overriden by children
-        // and it's all done, bc soon™ I'll do special brick types (e.g. powerup, armored or smth)
         virtual void onHit();
         bool isDestroyed() const;
 

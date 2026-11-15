@@ -5,7 +5,6 @@
 using Catch::Approx;
 
 TEST_CASE("Ball updates position linearly based on velocity and delta time") { 
-    // of course it will, what can go wrong here?
 
     Ball ball({0.f, 0.f}, {10.f, 5.f}, 10.f);
     ball.updatePosition(0.5f);

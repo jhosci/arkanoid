@@ -56,15 +56,6 @@ add_executable(Arkanoid
     src/app/Controller.cpp)
 target_link_libraries(Arkanoid PUBLIC GameCore SFML::Graphics)
 
-# check if sfml lib even works and attaches correctly
-add_executable(test_sfml testing/test_sfml.cpp)
-target_link_libraries(test_sfml PUBLIC 
-    SFML::Graphics 
-    SFML::Window 
-    SFML::System 
-)
-
-
 # UNIT TESTS
 enable_testing()
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
@@ -83,5 +74,10 @@ add_executable(tests
     
 target_link_libraries(tests PUBLIC Catch2::Catch2WithMain GameCore)
 
-
 catch_discover_tests(tests)
+
+# copying ./assets folder to Arkanoid executable directory to avoid filepath errs
+add_custom_command(TARGET Arkanoid POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/assets
+            $<TARGET_FILE_DIR:Arkanoid>/assets)

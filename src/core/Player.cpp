@@ -8,7 +8,7 @@ bool Player::gameOver() const {return lives_ <= 0;}
 
 void Player::raiseScore(int delta) {score_ += delta;}
 
-void Player::loseLife() {if(lives_ > 0) lives_ -= 1;} // INLINE IFs, just like PYTHON (!); the syntax is COND ? IF_TRUE : IF_FALSE // also unnecessary here
+void Player::loseLife() {if(lives_ > 0) lives_ -= 1;} 
 
 int Player::getLives() const {return lives_;}
 int Player::getScore() const {return score_;}

@@ -3,8 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-
-//Ball bouncing off paddle requires more math, since we want to change angles at which the ball is moving (bounce ball perpendicularly when hitting paddle in the middle, bounce 75 deg or smth when hitting paddle corner)
+namespace {
 vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
     float halfWidth = paddle.getSize().x / 2.0f;
     float paddleCenter = paddle.getPosition().x + halfWidth;
@@ -12,16 +11,14 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
     //how far is the ball from the center of the paddle, cast on [-1,1]
     float offset = std::clamp((ball.getPosition().x - paddleCenter) / halfWidth, -1.0f, 1.0f);
     
-    // can't believe there is no built-in function for this, 75deg is max angle of bounce
-    // bonus: constexpr behaves a bit like DEFINE (compiles the value), while const just calculates it during runtime
     float maxAngleRad = radians(75.0f);
     float angle = offset * maxAngleRad;
 
-    // no way, there is no function for changing to radians, but hypotenuse()? No problem!
     float speed = std::hypot(ball.getVelocity().x, ball.getVelocity().y);
     vector2d newVelocity = {speed * std::sin(angle), speed * std::cos(angle) * -1};
 
     return newVelocity;
+}
 }
 
 
@@ -38,7 +35,6 @@ World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<s
 
 void World::handleWalls() {
     // check ball collision with arena walls
-    // maybe call this 2 times, in case corner hit? 
     switch (arena_.checkWallHit(ball_))
     {
     case WallContact::Floor:
@@ -75,7 +71,7 @@ void World::handlePaddleHit() {
 }
 
 void World::handleBrickHit() {
-    for (auto& brick : bricks_) { // autopointer deducts brick (class) type on it's onw, no need to type it strongly
+    for (auto& brick : bricks_) { 
         if (brick->isDestroyed()) continue;
 
         const HitSide side = circleHitRectangle(ball_.getPosition(), ball_.getRadius(),
@@ -98,10 +94,7 @@ void World::handleBrickHit() {
 }
 
 void World::removeDestroyedBricks() {
-    // bool isBrickDestroyed(const auto& brick) {return brick->isDestroyed();} // it won't work
 
-    // to read: lamda functions in C++
-    // LAMBDA: [context](parameters) {body}; [] is also keyword for lambda func, context inside is related to variables *outside* but in this scope (*magic*)
     std::erase_if(bricks_, [](const auto& brick) { return brick->isDestroyed(); });
 
 }

@@ -34,12 +34,12 @@ World createWorld() {
 }
 
 int run() {
-    sf::RenderWindow window(sf::VideoMode({windowWidth, windowHeight}), "Arkanoid");
-    window.setFramerateLimit(60);
-
     World world = createWorld();
     const Controller controller;
-    const Renderer renderer;
+    const Renderer renderer("assets/font.ttf");
+
+    sf::RenderWindow window(sf::VideoMode({windowWidth, windowHeight}), "Arkanoid");
+    window.setFramerateLimit(60);
     sf::Clock clock;
 
     while (window.isOpen()) {
@@ -70,7 +70,7 @@ int main() {
     try {
         return run();
     } catch (const std::exception& error) {
-        std::cerr << "Fatal error: " << error.what() << '\n';
+        std::cerr << "Error: " << error.what() << '\n';
         return 1;
     }
 }

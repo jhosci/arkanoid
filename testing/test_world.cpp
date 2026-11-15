@@ -13,7 +13,6 @@ using Catch::Approx;
 // arena 800x600, ball radius 10
 // paddle at (350, 550), size 100x20
 
-// To shorten my misery (typing tooo much) - using namespace which is a set of definitions accessible globally BUT only in scope of this file
 namespace {
 using BrickList = std::vector<std::unique_ptr<Brick>>;
 

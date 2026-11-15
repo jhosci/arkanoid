@@ -1,15 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include "Brick.h"
 
-/*
-Module approx is because:
-> 0.1 + 0.2
-> 0.30000000000000004
-
-(I love mathematics)
-*/
-
-//To just see the syntax of catch2
 TEST_CASE("Brick tracks hit points and marks itself destroyed only when HP reaches zero") {
     SECTION("Brick with 3 HP survives two hits and is destroyed on the third") {
         Brick brick({100.f, 100.f}, {50.f, 20.f}, 3);
