@@ -120,8 +120,8 @@ void World::movePaddleRight(float dt) {paddle_.moveRight(dt);}
 void World::launchBall() {
     if (state_ != GameState::Serving) return;
 
-    float netVelocity = 100.0f;
-    float angle = radians(90-15); //might later randomize it
+    float netVelocity = 400.0f;
+    float angle = radians(15); //might later randomize it
     float velocityX = netVelocity * std::sin(angle);
     float velocityY = netVelocity * std::cos(angle) * -1;
 

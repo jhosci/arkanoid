@@ -6,8 +6,8 @@
 #include <vector>
 #include <memory>
 
-constexpr int COLUMNS = 24;
-constexpr int ROWS = 16;
+constexpr int COLUMNS = 12;
+constexpr int ROWS = 8;
 
 
 // Levels are a kColumns x kRows grid, stored row by row in a flat vector.

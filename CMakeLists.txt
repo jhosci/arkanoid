@@ -50,6 +50,13 @@ set(GAME_CORE_SOURCES
 add_library(GameCore ${GAME_CORE_SOURCES})
 target_include_directories(GameCore PUBLIC src/include)
 
+add_executable(Arkanoid
+    src/app/main.cpp
+    src/app/Renderer.cpp
+    src/app/Controller.cpp)
+target_link_libraries(Arkanoid PUBLIC GameCore SFML::Graphics)
+
+# check if sfml lib even works and attaches correctly
 add_executable(test_sfml testing/test_sfml.cpp)
 target_link_libraries(test_sfml PUBLIC 
     SFML::Graphics 
@@ -69,7 +76,6 @@ add_executable(tests
     testing/test_ball.cpp
     testing/test_bob_the_builder.cpp
     testing/test_geometry.cpp
-    testing/test_main.cpp
     testing/test_paddle.cpp
     testing/test_player.cpp
     testing/test_world.cpp
