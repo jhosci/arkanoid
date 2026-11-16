@@ -8,6 +8,7 @@ class Controller {
         sf::Keyboard::Key left_ = sf::Keyboard::Key::Left;
         sf::Keyboard::Key right_ = sf::Keyboard::Key::Right;
         sf::Keyboard::Key launch_ = sf::Keyboard::Key::Space;
+        sf::Keyboard::Key confirm_ = sf::Keyboard::Key::Enter;
 
     public:
         void handleEvent(const sf::Event& event, World& world) const;

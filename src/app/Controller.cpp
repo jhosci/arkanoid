@@ -3,6 +3,7 @@
 void Controller::handleEvent(const sf::Event& event, World& world) const {
     if (const auto* key = event.getIf<sf::Event::KeyPressed>()) {
         if (key->code == launch_) world.launchBall();
+        if (key->code == confirm_) {world.restart(); world.startNextLevel();} // they won't execute together anyways
     }
 }
 

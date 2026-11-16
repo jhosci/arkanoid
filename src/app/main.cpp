@@ -18,20 +18,12 @@ constexpr float maxDt = 1.0f / 30.0f;
 World createWorld() {
     const vector2d arenaSize{windowWidth, windowHeight};
     
-    // for now a block of bricks in the middle 
-    std::vector<int> layout(COLUMNS * ROWS, 0);
-    for (int row = 0; row < 6; ++row) {
-        for (int column = 1; column < COLUMNS-1; ++column) {
-            layout[row * COLUMNS + column] = 1;
-        }
-    }
-
     return World(Ball({0.f, 0.f}, {0.f, 0.f}, 8.f),           
                 Arena(arenaSize),
                 Player(),
                 Paddle({350.f, windowHeight * .95f}, {100.f, 10.f}, 600.f, 0.f, arenaSize.x),
-                buildLevel(layout, arenaSize));
-}
+                createLevel(1, arenaSize));
+            }
 
 int run() {
     World world = createWorld();

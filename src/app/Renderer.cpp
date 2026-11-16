@@ -141,4 +141,6 @@ void Renderer::drawStateOverlay(sf::RenderTarget& target, const World& world) co
     target.draw(overlay);
  
     drawText(target, message, 48, {size.x / 2.f, size.y * 0.4f}, 0.5f);
+    const std::string hint = (world.state() == GameState::GameOver) ? "Press ENTER to restart": "Press ENTER to continue";
+    drawText(target, hint, 20, {size.x / 2.f, size.y * 0.4f + 70.f}, 0.5f);
 }

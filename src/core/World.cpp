@@ -23,15 +23,38 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
 
 
 
-World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks, GameState state): 
+
+World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks,
+        GameState state):
     ball_(ball),
     arena_(arena),
     player_(player),
     paddle_(paddle),
     bricks_(std::move(bricks)),
-    state_(state)
+    state_(state),
+    startingPlayer_(player)
     {if (state_ == GameState::Serving) {createBallOnPaddle();}}
 
+void World::beginLevel() {
+    bricks_ = createLevel(player_.getLevel(), arena_.getSize());
+    
+    state_ = GameState::Serving;
+    createBallOnPaddle();
+}
+
+void World::restart() {
+    if (state_ != GameState::GameOver) return;
+
+    player_ = startingPlayer_;
+    beginLevel();
+}
+
+void World::startNextLevel() {
+    if (state_ != GameState::Cleared) return;
+
+    player_.nextLevel();
+    beginLevel();
+}    
 
 void World::handleWalls() {
     // check ball collision with arena walls

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Paddle.h"
 #include "Brick.h"
+#include "LevelBuilder.h"
 #include <vector>
 #include <memory>
 
@@ -18,18 +19,24 @@ class World {
         Paddle paddle_;
         std::vector<std::unique_ptr<Brick>> bricks_;
         GameState state_; 
+        Player startingPlayer_; // used to reset the game
         
+        void beginLevel();
         void createBallOnPaddle(); 
         void handleWalls();
         void handlePaddleHit();
         void handleBrickHit();
         void removeDestroyedBricks();
-
     public:
-        World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks, GameState state = GameState::Serving);
+        World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks,
+        GameState state = GameState::Serving);
 
+
+        void restart();
+        void startNextLevel();
+        
         void tick(float dt);
-
+    
         // controls
         void movePaddleLeft(float dt);
         void movePaddleRight(float dt);

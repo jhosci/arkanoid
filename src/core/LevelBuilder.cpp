@@ -29,3 +29,24 @@ std::vector<std::unique_ptr<Brick>> buildLevel(const std::vector<int>& layout, v
     }
     return bricks;
 }
+
+std::vector<std::unique_ptr<Brick>> createLevel(int level, vector2d arenaSize) {
+    std::vector<int> layout(COLUMNS * ROWS, 0);
+
+    // simple large rectangle of 1hp bricks
+    // for (int row = 0; row < 6; row++) {
+    //     for (int column = 1; column < COLUMNS - 1; ++column) {
+    //         layout[row * COLUMNS + column] = 1;
+    //     }
+    // }
+
+    // a double row of 3hp, then double row of 2hp, then double row of 1hp
+    for (int row = 0; row < 6; ++row) {
+    const int hp = 3 - row / 2;
+    for (int column = 1; column < COLUMNS - 1; ++column) {
+        layout[row * COLUMNS + column] = hp;
+    }
+}
+    
+    return buildLevel(layout, arenaSize); 
+}

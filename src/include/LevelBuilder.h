@@ -13,4 +13,5 @@ constexpr int ROWS = 8;
 // Each cell is the hit points of the brick in it; 0 means no brick.
 std::vector<int> defaultLayout();
 std::vector<std::unique_ptr<Brick>> buildLevel(const std::vector<int>& layout, vector2d arenaSize);
+std::vector<std::unique_ptr<Brick>> createLevel(int level, vector2d arenaSize);
 
