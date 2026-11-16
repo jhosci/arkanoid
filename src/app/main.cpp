@@ -1,4 +1,4 @@
-// at last
+// at last, the greatest invention
 #include "Controller.h"
 #include "LevelBuilder.h"
 #include "Renderer.h"
@@ -25,6 +25,7 @@ World createWorld() {
                 createLevel(1, arenaSize));
             }
 
+// main game loop, renders stuff, manages controls, runs World.tick() with all core logic
 int run() {
     World world = createWorld();
     const Controller controller;
@@ -46,6 +47,7 @@ int run() {
             }
             controller.handleEvent(*event, world);
         }
+
         if (window.hasFocus()) controller.update(world, dt);
 
         world.tick(dt);
@@ -56,9 +58,10 @@ int run() {
     }
     return 0;
 }
-}
+} // namespace ends here
 
 int main() {
+    // std tryexcept syntax, now catches only font import failure
     try {
         return run();
     } catch (const std::exception& error) {

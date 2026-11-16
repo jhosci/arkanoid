@@ -3,7 +3,7 @@
 namespace {
     sf::Vector2f vectorSFML(vector2d v) {return {v.x, v.y};}
 
-    // will do different colors based on bricks hp
+    // will do different colors based on bricks hp (red=3, yellow=2, green=1)
     sf::Color brickColor(int hp) {
         switch (hp)
         {

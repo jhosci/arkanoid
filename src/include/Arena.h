@@ -5,7 +5,8 @@ class Ball;
 
 enum class WallContact {None, SideWall, Ceiling, Floor};
 
-/*coordinates are calculated from topleft (0,0) to bottomright (size_.x, size_.y)*/
+// coordinates are calculated from topleft (0,0) to bottomright (size_.x, size_.y)
+// Arena class manages bounds and answers if a ball touches a wall (and which)
 class Arena {
     private:
         vector2d size_;

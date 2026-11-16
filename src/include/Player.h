@@ -1,5 +1,7 @@
 #pragma once
 
+// Player clas, holding lives, score, and level(now without much use)
+// Methods related to manipulation of fields
 class Player {
     private:
         int lives_;

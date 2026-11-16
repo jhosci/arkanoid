@@ -1,6 +1,7 @@
 #pragma once
 #include "Geometry.h"
 
+// Ball class manages things related to ball (pos, vel, radius) and methods of bouncing and moving
 class Ball {
     private:
         vector2d position_;

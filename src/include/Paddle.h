@@ -2,8 +2,8 @@
 #include "Geometry.h"
 
 // minimumX, maximumX are the limits of the arena, Paddle takes it's width into account on it's own
+// Paddle class knowing abt it's measurements, velocity and bounds, with metods related to movement
 class Paddle {
-    //position is it's topleft corner, bottomright is in (position+size) 
     private:
         vector2d position_;
         vector2d size_;

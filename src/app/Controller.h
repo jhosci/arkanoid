@@ -11,7 +11,8 @@ class Controller {
         sf::Keyboard::Key confirm_ = sf::Keyboard::Key::Enter;
 
     public:
+        // for events, like launching ball or restarting
         void handleEvent(const sf::Event& event, World& world) const;
-
+        // for moving the paddle
         void update(World& world, float dt) const;
 };

@@ -3,7 +3,12 @@
 #include <algorithm>
 #include <cmath>
 
-namespace {
+namespace { 
+// namespaces are cool, unnamed ones narrow the scope to fit to current file
+// which we should be doing to avoid names mismatches
+
+// Func calculates bounce angle of ball and Paddle, sits here bc neither of these classes should know abt eachother
+// Takes a reference to ball and Paddle, returns new velocity of ball
 vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
     float halfWidth = paddle.getSize().x / 2.0f;
     float paddleCenter = paddle.getPosition().x + halfWidth;
@@ -24,8 +29,7 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
 
 
 
-World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks,
-        GameState state):
+World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks, GameState state):
     ball_(ball),
     arena_(arena),
     player_(player),
@@ -56,8 +60,8 @@ void World::startNextLevel() {
     beginLevel();
 }    
 
+// check ball collision with arena walls
 void World::handleWalls() {
-    // check ball collision with arena walls
     switch (arena_.checkWallHit(ball_))
     {
     case WallContact::Floor:
@@ -117,7 +121,6 @@ void World::handleBrickHit() {
 }
 
 void World::removeDestroyedBricks() {
-
     std::erase_if(bricks_, [](const auto& brick) { return brick->isDestroyed(); });
 
 }
