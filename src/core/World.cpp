@@ -28,11 +28,15 @@ vector2d calculateBounce(const Ball &ball, const Paddle &paddle) {
 
 
 
+World::~World() {
+    delete player_;
+}
+
 
 World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<std::unique_ptr<Brick>> bricks, GameState state):
     ball_(ball),
     arena_(arena),
-    player_(player),
+    player_(new Player(player)),
     paddle_(paddle),
     bricks_(std::move(bricks)),
     state_(state),
@@ -40,23 +44,27 @@ World::World(Ball ball, Arena arena, Player player, Paddle paddle, std::vector<s
     {if (state_ == GameState::Serving) {createBallOnPaddle();}}
 
 void World::beginLevel() {
-    bricks_ = createLevel(player_.getLevel(), arena_.getSize());
+    bricks_ = createLevel(player_->getLevel(), arena_.getSize());
     
     state_ = GameState::Serving;
     createBallOnPaddle();
 }
 
 void World::restart() {
+    // explicitly requested showcase that I can code with new() and delete() methods
     if (state_ != GameState::GameOver) return;
 
-    player_ = startingPlayer_;
+    Player* fresh = new Player(startingPlayer_);
+    delete player_;
+    player_ = fresh;
+
     beginLevel();
 }
 
 void World::startNextLevel() {
     if (state_ != GameState::Cleared) return;
 
-    player_.nextLevel();
+    player_->nextLevel();
     beginLevel();
 }    
 
@@ -65,8 +73,8 @@ void World::handleWalls() {
     switch (arena_.checkWallHit(ball_))
     {
     case WallContact::Floor:
-        player_.loseLife();
-        if (player_.gameOver()) {
+        player_->loseLife();
+        if (player_->gameOver()) {
             state_ = GameState::GameOver;
         } else {
             state_ = GameState::Serving;
@@ -115,7 +123,7 @@ void World::handleBrickHit() {
         }
 
         brick->onHit();
-        if (brick->isDestroyed()) player_.raiseScore(brick->getScore());
+        if (brick->isDestroyed()) player_->raiseScore(brick->getScore());
         return;
     }
 }
