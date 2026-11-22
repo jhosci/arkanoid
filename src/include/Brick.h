@@ -16,11 +16,22 @@ class Brick {
         // destructor has to be virtual if method has >=1 virtual methods (if not, destroying a child obj will not free the additional data the child overwritten, causing memleaks)
         virtual ~Brick() = default;
         
-        virtual void onHit();
+        virtual void onHit(HitSide side = HitSide::None);
         bool isDestroyed() const;
 
         vector2d getPosition() const;
         vector2d getSize() const;
         int getHp() const;
         int getScore() const;
+};
+
+
+class ArmoredBrick:public Brick {
+    private:
+        HitSide armoredSide_;
+
+    public:
+        ArmoredBrick(vector2d position, vector2d size, int hp, HitSide armoredSide, int score = 10);
+
+        void onHit(HitSide side = HitSide::None) override;
 };

@@ -122,7 +122,7 @@ void World::handleBrickHit() {
             case HitSide::None:   continue;
         }
 
-        brick->onHit();
+        brick->onHit(side);
         if (brick->isDestroyed()) player_->raiseScore(brick->getScore());
         return;
     }

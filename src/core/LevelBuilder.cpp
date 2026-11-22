@@ -33,20 +33,45 @@ std::vector<std::unique_ptr<Brick>> buildLevel(const std::vector<int>& layout, v
 std::vector<std::unique_ptr<Brick>> createLevel(int level, vector2d arenaSize) {
     std::vector<int> layout(COLUMNS * ROWS, 0);
 
-    // simple large rectangle of 1hp bricks
+    // // simple large rectangle of 1hp bricks
     // for (int row = 0; row < 6; row++) {
     //     for (int column = 1; column < COLUMNS - 1; ++column) {
     //         layout[row * COLUMNS + column] = 1;
     //     }
     // }
+    // return buildLevel(layout, arenaSize); 
 
-    // a double row of 3hp, then double row of 2hp, then double row of 1hp
-    for (int row = 0; row < 6; ++row) {
-    const int hp = 3 - row / 2;
-    for (int column = 1; column < COLUMNS - 1; ++column) {
-        layout[row * COLUMNS + column] = hp;
+    // // a double row of 3hp, then double row of 2hp, then double row of 1hp
+    // for (int row = 0; row < 6; ++row) {
+    // const int hp = 3 - row / 2;
+    //     for (int column = 1; column < COLUMNS - 1; ++column) {
+    //         layout[row * COLUMNS + column] = hp;
+    //     }
+    // }
+    // return buildLevel(layout, arenaSize); 
+
+    // 3 rows of 1hp bricks, bottom one armored from the bottom (new ArmoredBrick class showcase)
+    for (int row = 2; row <= 3; ++row) {
+        for (int col = 2; col < COLUMNS - 2; col++) {
+            layout[row * COLUMNS + col] = 1;
+        }
     }
-}
+
+    auto bricks = buildLevel(layout, arenaSize);
+
+    const float brickWidth = arenaSize.x / COLUMNS;
+    const float brickHeight = arenaSize.y / ROWS * 0.5f;
+    const float topMargin = arenaSize.y * 0.1f;
+
+    for (int col = 2; col < COLUMNS - 2; col++) {
+        bricks.push_back(std::make_unique<ArmoredBrick>(
+            vector2d{col * brickWidth, topMargin + 4 * brickHeight},
+            vector2d{brickWidth, brickHeight},
+            1,
+            HitSide::Bottom,
+            30
+        ));
+    }
+    return bricks;
     
-    return buildLevel(layout, arenaSize); 
 }
